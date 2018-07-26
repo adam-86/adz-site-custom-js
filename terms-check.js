@@ -1,27 +1,31 @@
 // Make sure terms and conditions have been opened before allowing signup
 
-//variables....
-const termsLink = document.querySelector('.terms-link'),
-      signupCheck = document.querySelector('.signup-check'),
-      signupSubmit = document.querySelector('.signup-submit');
+//file name --> register-form.php
 
-//listen for clicks on the terms and conditions link..
-  termsLink.addEventListener('click', function(){
+const	alertMessage = 'Please read the terms and conditions before continuing',
+      signupCheck = document.querySelector('.signup-checkbox>.signup-check'),
+      elems = [signupCheck, document.querySelector('.signup-submit')];
 
-// if clicked, set the signupCheck checked to true (false by default)
-    signupCheck.checked = true;
 
-  })
+    elems.forEach(elem => {
 
-  signupSubmit.addEventListener('click', function(e){
+  //listen for clicks on submit button or checkbox
+      elem.addEventListener('click', function(e){
 
-// if submit is clicked without first clicking on terms link....
-    if (signupCheck.checked == false) {
+  //if the value of signup check is unread.....
+        if (signupCheck.value === 'unread') {
 
-// prevent form from submitting
-      e.preventDefault();
+  //prevent devault action of element that was clicked
+          e.preventDefault();
 
-// alert message inform them to read the terms.
-      alert('You must read the terms and conditions before signing up');
-    }
+          alert(alertMessage);
+        };
+      });
+    });
+
+  /* if the terms and conditions link is actually clicked on
+    the value of signupCheck is set to ok, allowing the form to be submitted */
+  document.querySelector('.terms-link').addEventListener('click', function(){
+    signupCheck.value = "ok";
+
 });
